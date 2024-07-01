@@ -41,7 +41,11 @@ class UserRegistrationView(generics.GenericAPIView):
                 "success": True,
                 "statusCode": status_code,
                 "message": "User successfully registered!",
-                "user": serializer.data, # 패스워드까지 노출되나?? 아래로그인 참고해서(.data[]형식) 바꾸기
+                #"user": serializer.data, # 패스워드까지 노출된다, 아래로그인 참고해서(.data[]형식) 바꾸기
+                "user" : {
+                    "eamil" : serializer.data["email"],
+                    "name" : serializer.data["name"],
+                }
             }
 
             return Response(response, status=status_code)

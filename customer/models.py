@@ -12,6 +12,7 @@ class CustomerRequest(models.Model):
         'user.CustomUser',
         related_name = 'customerrequest',
         on_delete=models.CASCADE,
+        # db_column="owner_id" # 이름지정 - 기본값은 owner_id, 나중에 email로 바꾸기
     )
 
     address = models.CharField(max_length=200, blank=False, default='')

@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-mta=)yw8hg%t$ecoz2-xpopb65qd8%xz%)cxispo*_!3w#6_+7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = [""]
 
 
 # Application definition
@@ -48,39 +49,62 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 # CORS 관련 설정
+
+# 화이트리스트는 프로덕션환경일때
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "http://192.168.0.8:3000",
+    "http://192.168.0.3:3000",
 ]  # (포트 지정)
-# CORS_ALLOW_ALL_ORIGINS = True  # (모든 포트 허용)
 
-#HTTP methods 추가
+# CORS_ALLOW_ALL_ORIGINS = True  # (모든 포트 허용)
+CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_HEADERS = ['*']
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1",
+#     "http://localhost",
+#     "http://192.168.0.8",
+# ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://127.0.0.1",
+#     "http://localhost",
+#     "http://192.168.0.8",
+# ]
+
+# ALLOWED_HOSTS = ["0.0.0.0", "localhost", "192.168.0.8"]
+
+# HTTP methods 추가
 CORS_ALLOW_METHODS = (
-"DELETE",
-"GET",
-"OPTIONS",
-"PATCH",
-"POST",
-"PUT",
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 )
 
 CORS_ALLOW_HEADERS = (
-"accept",
-"authorization",
-"content-type",
-"user-agent",
-"x-csrftoken",
-"x-requested-with",
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 )
+
 
 ROOT_URLCONF = "dronefieldapi.urls"
 
